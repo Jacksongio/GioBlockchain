@@ -22,3 +22,8 @@ class Block:
     def calculate_hash(self):
         to_hash = f"{self.index}{self.previous_hash}{self.data}{self.timestamp}"
         return hashlib.sha256(to_hash.encode()).hexdigest()
+    
+    def mine_block(self, difficulty):
+        while not self.hash.startswith("0" * difficulty):
+            self.nonce += 1
+            self.hash = self.calculate_hash()
