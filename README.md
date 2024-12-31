@@ -1,5 +1,5 @@
 <h1 align="center">WELCOME TO GIOBLOCKCHAIN</h1>
-<h3 align="center">A passionate Computer Science student at Virginia Tech.</h3>
+<h3 align="center">Python-based Blockchain implementation</h3>
 This Python-based blockchain implementation demonstrates core principles like block hashing and chain validation while featuring advanced functionalities such as smart contracts, transaction validation, and decentralized networking. It simulates real-world blockchains like Bitcoin and Ethereum for learning and exploration.
 
 
