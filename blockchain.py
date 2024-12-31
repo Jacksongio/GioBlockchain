@@ -22,7 +22,7 @@ class Blockchain:
     def __init__(self):
         self.chain = [self.create_genesis_block()]
         self.pending_transactions = []
-        self.difficulty = 4
+        self.difficulty = 2
         self.mining_reward = 50
     # Function to create the first block of the blockchain
     def create_genesis_block(self):
@@ -37,18 +37,21 @@ class Blockchain:
         self.pending_transactions.append(transaction)
     # Function to mine a new block with the pending transactions
     def mine_pending_transactions(self, miner_address):
-        #Create a new block with the pending transactions
+        # Create a new block with the pending transactions
         new_block = Block(
             index=len(self.chain),
             previous_hash=self.get_latest_block().hash,
-            transactions=self.pending_transactions
+            transactions=self.pending_transactions  # Use 'transactions' to match the Block class
         )
-        #Mine the new block
+        # Mine the new block
         new_block.mine_block(self.difficulty)
         print(f"Block mined: {new_block.hash}")
-        #append the new block to the chain
+        
+        # Add the new block to the chain
         self.chain.append(new_block)
+        # Reward the miner
         self.pending_transactions = [{"sender": "System", "recipient": miner_address, "amount": self.mining_reward}]
+
     # Function to check if the blockchain is valid
     def is_chain_valid(self):
         #Check the validity of each block in the chain
