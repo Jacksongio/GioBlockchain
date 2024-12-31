@@ -1,6 +1,6 @@
 import hashlib
 import time
-# Block class to represent a block in the blockchain
+#Block class to represent a block in the blockchain
 class Block:
     #Constructor for the individual block
     def __init__(self, index, previous_hash, transactions, timestamp=None):
