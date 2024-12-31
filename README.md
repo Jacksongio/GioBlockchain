@@ -6,6 +6,6 @@ This Python-based blockchain implementation demonstrates core principles like bl
 **TODO:**
 
 - Just worked on getting dummy main.py so we can view stdout mine_block seems to run an infinite loops, this could be from two issues:
-    -Incorrect calculation of hash
-    -Issue with calculation of difficulty
+    1. Incorrect calculation of hash
+    2. Issue with calculation of difficulty
         (COULD BE BOTH?)
