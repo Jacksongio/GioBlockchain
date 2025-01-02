@@ -32,8 +32,11 @@ class Blockchain:
         return self.chain[-1]
     # Function to add a transaction to the pending transactions list
     def add_transaction(self, transaction):
-        #TO_DO: Append the transaction to the pending transactions list
         #TO_DO: VERIFICATION OF THE TRANSACTION
+        #How would I verify the transaction?
+        #What are the conditions that need to be checked?
+        #Add the transaction to the pending transactions list
+        
         self.pending_transactions.append(transaction)
     # Function to mine a new block with the pending transactions
     def mine_pending_transactions(self, miner_address):
