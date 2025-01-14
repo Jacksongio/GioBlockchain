@@ -1,0 +1,41 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GioBlockchain</title>
+</head>
+<body>
+    <h1>Welcome to GioBlockchain</h1>
+
+    <!-- Add Transaction Section -->
+    <h2>Add a Transaction</h2>
+    <form action="/add_transaction" method="POST">
+        <label for="sender_public_key">Sender Public Key (Hex):</label><br>
+        <input type="text" id="sender_public_key" name="sender_public_key" size="80" required><br><br>
+
+        <label for="recipient_public_key">Recipient Public Key (Hex):</label><br>
+        <input type="text" id="recipient_public_key" name="recipient_public_key" size="80" required><br><br>
+
+        <label for="amount">Amount:</label><br>
+        <input type="number" id="amount" name="amount" required><br><br>
+
+        <label for="signature">Signature (Hex):</label><br>
+        <input type="text" id="signature" name="signature" size="80" required><br><br>
+
+        <button type="submit">Add Transaction</button>
+    </form>
+
+    <!-- Mine Block Section -->
+    <h2>Mine Pending Transactions</h2>
+    <form action="/mine_block" method="POST">
+        <label for="miner_name">Miner Name:</label><br>
+        <input type="text" id="miner_name" name="miner_name" value="Enter miner name here:" required><br><br>
+        <button type="submit">Mine Block</button>
+    </form>
+
+    <!-- View Blockchain Link -->
+    <h2>View Blockchain</h2>
+    <a href="/chain">Click to view the chain</a>
+</body>
+</html>
