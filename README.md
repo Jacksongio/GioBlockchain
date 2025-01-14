@@ -3,7 +3,7 @@
 This Python-based blockchain implementation demonstrates core principles like block hashing and chain validation while featuring advanced functionalities such as smart contracts, transaction validation, and decentralized networking. It simulates real-world blockchains like Bitcoin and Ethereum for learning and exploration.
 
 ![alt text](HomePage.png)
-![alt text](Blockchain.png)
+![alt text](blockchain.png)
 ---
 
 ## Table of Contents
@@ -88,13 +88,13 @@ Follow these steps to get the project up and running:
    > cd GioBlockchain
 2. **Create a Virtual Environment** (optional but recommended):
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate # For Linux
+> python3 -m venv .venv
+> source .venv/bin/activate # For Linux
 #On windows: .venv\Scripts\activate
 ```
 3. **Install Dependencies:**
 ```bash
-pip install -r requirements.txt
+> pip install -r requirements.txt
 ```
 ---
 ## Usage
