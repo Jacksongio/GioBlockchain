@@ -1,31 +1,29 @@
-# Users class
+# users.py
+
+from ecdsa import SigningKey, SECP256k1
+
 class User:
     def __init__(self, name, amount):
         self.name = name
-        self.amount = amount  # Changed from 0 to 'amount' to use the provided value
+        self.amount = amount
+        self.private_key = SigningKey.generate(curve=SECP256k1)
+        self.public_key = self.private_key.get_verifying_key()
 
-    # Function to adjust the balance of a User
+    def sign_transaction(self, transaction_data):
+        return self.private_key.sign(transaction_data.encode())
+
     def adjust_balance(self, amount):
         self.amount += amount
 
-    # Function to get the balance of a User
     def get_balance(self):
         return self.amount
 
-    # Function to transfer an amount from one User to another
-    def transfer(self, recipient, amount):
-        if self.amount >= amount:
-            self.amount -= amount
-            recipient.adjust_balance(amount)
-            return True
-        else:
-            return False
-
-    # Function to print the details of a User
-    def to_string(self):
-        print(f"User: {self.name}")
-        print(f"Balance: {self.amount}")
-
-    # Function to get the name of the User
     def get_name(self):
         return self.name
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'amount': self.amount,
+            'public_key': self.public_key.to_string().hex()
+        }

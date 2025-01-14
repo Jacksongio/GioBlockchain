@@ -1,45 +1,43 @@
-import hashlib
-import time
+# block.py
+
 import json
-#Block class to represent a block in the blockchain
+import hashlib
+
 class Block:
-    #Constructor for the individual block
-    def __init__(self, index, previous_hash, transactions, timestamp=None):
-        # Index of the block
-        self.index = index
-        # Hash of the previous block
-        self.previous_hash = previous_hash
-        # Data to be stored in the block
+    def __init__(self, transactions, previous_hash, difficulty):
         self.transactions = transactions
-        #Manually set difficulty
-        self.difficulty = 2
-
-        # If timestamp is not provided, it will take the current time
-        self.timestamp = timestamp or time.time()
-        self.nonce = 0  # Initialize nonce for mining
-        # Hash of the block
+        self.previous_hash = previous_hash
+        self.nonce = 0  # New: Nonce for PoW
+        self.difficulty = difficulty
         self.hash = self.calculate_hash()
-        
-    # Function to calculate the hash of the block using the index, previous hash, data and timestamp
-    # The hash is calculated using the SHA-256 algorithm and is returned as a hexadecimal string
-    # The string is encoded to bytes before hashing to avoid any errors
-    
-    def calculate_hash(self):
-        block_data = json.dumps(self.transactions, sort_keys=True)  # Stable representation
-        to_hash = f"{self.index}{self.previous_hash}{block_data}{self.timestamp}{self.nonce}"
-        return hashlib.sha256(to_hash.encode()).hexdigest()
 
-    
-    def mine_block(self, difficulty):
-        while not self.hash.startswith("0" * difficulty):
+    def calculate_hash(self):
+        transactions_serializable = [
+            tx.to_dict() if hasattr(tx, 'to_dict') else tx
+        for tx in self.transactions
+        ]
+        block_data = json.dumps({
+            'transactions': transactions_serializable,
+            'previous_hash': self.previous_hash,
+            'nonce': self.nonce
+        }, sort_keys=True)
+        return hashlib.sha256(block_data.encode()).hexdigest()
+
+    def mine_block(self):
+        print("⛏️  Mining block...")
+        # Proof-of-Work: hash must start with 'difficulty' number of zeros
+        target = '0' * self.difficulty
+
+        while not self.hash.startswith(target):
             self.nonce += 1
-            
-            # Print progress every 10,000 iterations (for example)
-            if self.nonce % 10000 == 0:
-                print(f"Still mining... nonce = {self.nonce}")
-            #DEBUG: THIS line is added to stop mining after 9,000,000 iterations
-            #DEBUG: This is to prevent the program from running indefinitely
-            #DEBUG: You can remove this line if you want to mine indefinitely
-            # elif self.nonce % 1000000 == 0 or self.nonce >= 9000000:
-            #     exit()
             self.hash = self.calculate_hash()
+
+        print(f"✅ Block mined: {self.hash}")
+
+    def to_string(self):
+        print(f"Hash: {self.hash}")
+        print(f"Previous Hash: {self.previous_hash}")
+        print(f"Nonce: {self.nonce}")
+        print("Transactions:")
+        for tx in self.transactions:
+            print(tx.to_dict())
